@@ -1,8 +1,8 @@
-package revolut
+package constants
 
 const (
-	defaultMerchantApiUrl        = "https://merchant.revolut.com/api"
-	defaultMerchantSandboxApiUrl = "https://sandbox-merchant.revolut.com/api"
+	DefaultMerchantApiUrl        = "https://merchant.revolut.com/api"
+	DefaultMerchantSandboxApiUrl = "https://sandbox-merchant.revolut.com/api"
 )
 
 type RevolutApiVersion string

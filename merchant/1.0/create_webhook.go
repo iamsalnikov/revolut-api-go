@@ -1,12 +1,12 @@
-package revolut
+package revolut_merchant
 
 import (
 	"encoding/json"
-	"github.com/jerethom/revolut-api-go/types/webhook_types"
+	"github.com/jerethom/revolut-api-go/merchant/1.0/types/webhook_types"
 	"net/http"
 )
 
-func (c *Client) CreateWebhook(
+func (c *Merchant) CreateWebhook(
 	payload webhook_types.CreateWebhookPayload,
 ) (webhook_types.CreateWebhookResponse, error) {
 	body, err := json.Marshal(payload)
@@ -14,7 +14,7 @@ func (c *Client) CreateWebhook(
 		return webhook_types.CreateWebhookResponse{}, err
 	}
 
-	res, err := c.makeRequest([]string{"webhooks"}, http.MethodPost, body)
+	res, err := c.clientRequest.MakeRequest([]string{"webhooks"}, http.MethodPost, body)
 	if err != nil {
 		return webhook_types.CreateWebhookResponse{}, err
 	}

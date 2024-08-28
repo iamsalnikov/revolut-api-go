@@ -1,19 +1,24 @@
 package revolut
 
 import (
+	"github.com/jerethom/revolut-api-go/constants"
+	"github.com/jerethom/revolut-api-go/merchant/1.0"
+	"github.com/jerethom/revolut-api-go/shared"
 	"net/url"
 )
 
 type Client struct {
 	privateKey string
-	apiVersion RevolutApiVersion
+	apiVersion constants.RevolutApiVersion
 	url        *url.URL
 	isSandbox  bool
+
+	Merchant *revolut_merchant.Merchant
 }
 
 type ClientOption func(client *Client)
 
-func WithApiVersion(version RevolutApiVersion) ClientOption {
+func WithApiVersion(version constants.RevolutApiVersion) ClientOption {
 	return func(client *Client) {
 		client.apiVersion = version
 	}
@@ -33,17 +38,20 @@ func NewClient(privateKey string, options ...ClientOption) *Client {
 	}
 
 	if client.apiVersion == "" {
-		client.apiVersion = RevolutApiVersionLatest
+		client.apiVersion = constants.RevolutApiVersionLatest
 	}
 
 	if client.isSandbox {
-		client.url, _ = url.Parse(defaultMerchantSandboxApiUrl)
+		client.url, _ = url.Parse(constants.DefaultMerchantSandboxApiUrl)
 	} else {
-		client.url, _ = url.Parse(defaultMerchantApiUrl)
+		client.url, _ = url.Parse(constants.DefaultMerchantApiUrl)
 	}
 
 	newPath, _ := url.JoinPath(client.url.Path, string(client.apiVersion))
 	client.url.Path = newPath
+
+	clientRequest := shared.NewClientRequest(client.privateKey, client.apiVersion, client.url)
+	client.Merchant = revolut_merchant.NewMerchant(clientRequest)
 
 	return client
 }

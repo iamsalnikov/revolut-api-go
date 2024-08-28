@@ -1,4 +1,4 @@
-package main
+package revolut_api_go
 
 const (
 	defaultMerchantApiUrl        = "https://merchant.revolut.com/api"

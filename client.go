@@ -1,4 +1,4 @@
-package main
+package revolut_api_go
 
 import (
 	"net/url"

@@ -2,8 +2,8 @@ package revolut_api_go
 
 import (
 	"encoding/json"
+	"github.com/jerethom/revolut-api-go/types/customer_types"
 	"net/http"
-	"revolut-api-go/types/customer_types"
 )
 
 func (c *Client) CreateCustomer(

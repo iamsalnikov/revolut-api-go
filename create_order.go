@@ -2,8 +2,8 @@ package revolut_api_go
 
 import (
 	"encoding/json"
+	"github.com/jerethom/revolut-api-go/types/order_types"
 	"net/http"
-	"revolut-api-go/types/order_types"
 )
 
 func (c *Client) CreateOrder(

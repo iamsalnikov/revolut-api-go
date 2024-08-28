@@ -127,7 +127,7 @@ func main() {
 
 ## Documentation
 
-For complete Revolut API documentation, please refer to the [official Revolut API documentation](https://developer.revolut.com/docs/api-reference/).
+For complete Revolut API documentation, please refer to the [official Revolut API documentation](https://developer.revolut.com/docs/merchant/merchant-api).
 
 For documentation specific to this package, use the `go doc` command or check the [online documentation](https://pkg.go.dev/github.com/jerethom/revolut-api-go).
 

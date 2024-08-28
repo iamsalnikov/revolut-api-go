@@ -1,4 +1,4 @@
-package revolut_api_go
+package order_types
 
 import (
 	"encoding/json"

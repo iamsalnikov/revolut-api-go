@@ -3,25 +3,26 @@ package revolut_api_go
 import (
 	"encoding/json"
 	"net/http"
+	"revolut-api-go/types/order_types"
 )
 
 func (c *Client) CreateOrder(
-	order CreateOrderPayload,
-) (CreateOrderResponse, error) {
+	order order_types.CreateOrderPayload,
+) (order_types.CreateOrderResponse, error) {
 	body, err := json.Marshal(order)
 	if err != nil {
-		return CreateOrderResponse{}, err
+		return order_types.CreateOrderResponse{}, err
 	}
 
 	res, err := c.makeRequest([]string{"orders"}, http.MethodPost, body)
 	if err != nil {
-		return CreateOrderResponse{}, err
+		return order_types.CreateOrderResponse{}, err
 	}
 
-	response := new(CreateOrderResponse)
+	response := new(order_types.CreateOrderResponse)
 	err = json.Unmarshal(res, response)
 	if err != nil {
-		return CreateOrderResponse{}, err
+		return order_types.CreateOrderResponse{}, err
 	}
 
 	return *response, nil

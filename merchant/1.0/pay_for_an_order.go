@@ -7,7 +7,7 @@ import (
 )
 
 func (c *Merchant) PayForAnOrder(
-	id string,
+	orderId string,
 	payload PayForAnOrderPayload,
 ) (PayForAnOrderResponse, error) {
 	body, err := json.Marshal(payload)
@@ -16,7 +16,7 @@ func (c *Merchant) PayForAnOrder(
 	}
 
 	res, err := c.clientRequest.MakeRequest(
-		[]string{"orders", id, "payments"},
+		[]string{"orders", orderId, "payments"},
 		http.MethodPost,
 		body,
 		url.Values{},

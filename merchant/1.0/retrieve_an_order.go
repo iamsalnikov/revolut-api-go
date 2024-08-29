@@ -6,9 +6,9 @@ import (
 	"net/url"
 )
 
-func (c *Merchant) RetrieveAnOrder(id string) (RetrieveAnOrderResponse, error) {
+func (c *Merchant) RetrieveAnOrder(orderId string) (RetrieveAnOrderResponse, error) {
 	body, err := c.clientRequest.MakeRequest(
-		[]string{"orders", id},
+		[]string{"orders", orderId},
 		http.MethodGet,
 		make([]byte, 0),
 		url.Values{},

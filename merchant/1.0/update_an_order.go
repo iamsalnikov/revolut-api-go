@@ -6,13 +6,21 @@ import (
 	"net/url"
 )
 
-func (c *Merchant) UpdateAnOrder(id string, payload UpdateAnOrderPayload) (UpdateAnOrderResponse, error) {
+func (c *Merchant) UpdateAnOrder(
+	orderId string,
+	payload UpdateAnOrderPayload,
+) (UpdateAnOrderResponse, error) {
 	body, err := json.Marshal(payload)
 	if err != nil {
 		return UpdateAnOrderResponse{}, err
 	}
 
-	res, err := c.clientRequest.MakeRequest([]string{"orders", id}, http.MethodPatch, body, url.Values{})
+	res, err := c.clientRequest.MakeRequest(
+		[]string{"orders", orderId},
+		http.MethodPatch,
+		body,
+		url.Values{},
+	)
 	if err != nil {
 		return UpdateAnOrderResponse{}, err
 	}

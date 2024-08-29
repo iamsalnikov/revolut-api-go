@@ -1,6 +1,6 @@
 package revolut_merchant
 
-type CreateWebhookPayload struct {
+type CreateAWebhookPayload struct {
 	//Your webhook's URL to which event notifications will be sent.
 	//
 	//Must be a valid HTTP or HTTPS URL, capable of receiving POST requests.

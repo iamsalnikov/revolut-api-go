@@ -7,7 +7,7 @@ import (
 )
 
 func (c *Merchant) CreateACustomer(
-	input CreateCustomerPayload,
+	input CreateACustomerPayload,
 ) (CreateACustomerResponse, error) {
 	body, err := json.Marshal(input)
 	if err != nil {

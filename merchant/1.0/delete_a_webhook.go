@@ -5,9 +5,9 @@ import (
 	"net/url"
 )
 
-func (c *Merchant) DeleteAWebhook(id string) error {
+func (c *Merchant) DeleteAWebhook(webhookId string) error {
 	_, err := c.clientRequest.MakeRequest(
-		[]string{"webhooks", id},
+		[]string{"webhooks", webhookId},
 		http.MethodDelete,
 		make([]byte, 0), url.Values{},
 	)

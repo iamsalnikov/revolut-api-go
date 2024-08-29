@@ -7,7 +7,7 @@ import (
 )
 
 func (c *Merchant) CreateAWebhook(
-	payload CreateWebhookPayload,
+	payload CreateAWebhookPayload,
 ) (CreateAWebhookResponse, error) {
 	body, err := json.Marshal(payload)
 	if err != nil {

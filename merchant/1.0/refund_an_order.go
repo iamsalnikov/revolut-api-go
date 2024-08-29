@@ -7,7 +7,7 @@ import (
 )
 
 func (c *Merchant) RefundAnOrder(
-	id string,
+	orderId string,
 	payload RefundAnOrderPayload,
 ) (RefundAnOrderResponse, error) {
 	body, err := json.Marshal(payload)
@@ -16,7 +16,7 @@ func (c *Merchant) RefundAnOrder(
 	}
 
 	res, err := c.clientRequest.MakeRequest(
-		[]string{"1.0", "orders", id, "refund"},
+		[]string{"1.0", "orders", orderId, "refund"},
 		http.MethodPost,
 		body,
 		url.Values{},

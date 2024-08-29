@@ -72,7 +72,7 @@ type CustomerPaymentMethod struct {
 	MethodDetails *MethodDetails `json:"method_details"`
 }
 
-type CreateCustomerPayload struct {
+type CreateACustomerPayload struct {
 	//The full name of the customer.
 	FullName string `json:"full_name,omitempty"`
 	//The name of the customer's business.

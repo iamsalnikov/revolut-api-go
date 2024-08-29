@@ -7,7 +7,7 @@ import (
 )
 
 func (c *Merchant) UpdateACustomer(
-	id string,
+	customerId string,
 	payload UpdateACustomerPayload,
 ) (UpdateACustomerResponse, error) {
 	body, err := json.Marshal(payload)
@@ -16,7 +16,7 @@ func (c *Merchant) UpdateACustomer(
 	}
 
 	res, err := c.clientRequest.MakeRequest(
-		[]string{"1.0", "customers", id},
+		[]string{"1.0", "customers", customerId},
 		http.MethodPatch,
 		body,
 		url.Values{},

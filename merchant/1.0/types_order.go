@@ -883,14 +883,24 @@ type RefundAnOrderResponse struct {
 }
 
 type Environment struct {
-	Type                 string `json:"type"`
-	TimeZoneUtcOffset    int    `json:"time_zone_utc_offset"`
-	ColorDepth           int    `json:"color_depth"`
-	ScreenWidth          int    `json:"screen_width"`
-	ScreenHeight         int    `json:"screen_height"`
-	JavaEnabled          bool   `json:"java_enabled"`
-	ChallengeWindowWidth int    `json:"challenge_window_width"`
-	BrowserUrl           string `json:"browser_url"`
+	//Possible values: [browser]
+	//
+	//Type of environment where the payment was made.
+	Type string `json:"type"`
+	//Defines the offset to UTC in minutes.
+	TimeZoneUtcOffset int `json:"time_zone_utc_offset"`
+	//The browser's available colour depth.
+	ColorDepth int `json:"color_depth"`
+	//The browser's screen width in pixels.
+	ScreenWidth int `json:"screen_width"`
+	//The browser's screen height in pixels.
+	ScreenHeight int `json:"screen_height"`
+	//Indicates if the browser has Java enabled.
+	JavaEnabled bool `json:"java_enabled"`
+	//Defines the width of the pop-up window where the authentication challenge appears.
+	ChallengeWindowWidth int `json:"challenge_window_width"`
+	//The URL of the page where the payment was initiated.
+	BrowserUrl string `json:"browser_url"`
 }
 
 type SavedPaymentMethod struct {

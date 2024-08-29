@@ -15,7 +15,12 @@ func (c *Merchant) RefundAnOrder(
 		return RefundAnOrderResponse{}, err
 	}
 
-	res, err := c.clientRequest.MakeRequest([]string{"1.0", "orders", id, "refund"}, http.MethodPost, body, url.Values{})
+	res, err := c.clientRequest.MakeRequest(
+		[]string{"1.0", "orders", id, "refund"},
+		http.MethodPost,
+		body,
+		url.Values{},
+	)
 	if err != nil {
 		return RefundAnOrderResponse{}, err
 	}

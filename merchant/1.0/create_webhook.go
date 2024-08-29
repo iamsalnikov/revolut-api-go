@@ -3,6 +3,7 @@ package revolut_merchant
 import (
 	"encoding/json"
 	"net/http"
+	"net/url"
 )
 
 func (c *Merchant) CreateWebhook(
@@ -13,7 +14,12 @@ func (c *Merchant) CreateWebhook(
 		return CreateWebhookResponse{}, err
 	}
 
-	res, err := c.clientRequest.MakeRequest([]string{"webhooks"}, http.MethodPost, body, url.Values{})
+	res, err := c.clientRequest.MakeRequest(
+		[]string{"webhooks"},
+		http.MethodPost,
+		body,
+		url.Values{},
+	)
 	if err != nil {
 		return CreateWebhookResponse{}, err
 	}

@@ -3,6 +3,7 @@ package revolut_merchant
 import (
 	"encoding/json"
 	"net/http"
+	"net/url"
 )
 
 func (c *Merchant) ListWebhooks() ([]ListWebhooksResponse, error) {

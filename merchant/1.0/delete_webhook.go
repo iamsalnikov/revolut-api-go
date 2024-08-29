@@ -1,6 +1,9 @@
 package revolut_merchant
 
-import "net/http"
+import (
+	"net/http"
+	"net/url"
+)
 
 func (c *Merchant) DeleteWebhook(id string) error {
 	_, err := c.clientRequest.MakeRequest(

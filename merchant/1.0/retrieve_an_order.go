@@ -7,7 +7,12 @@ import (
 )
 
 func (c *Merchant) RetrieveAnOrder(id string) (RetrieveAnOrderResponse, error) {
-	body, err := c.clientRequest.MakeRequest([]string{"orders", id}, http.MethodGet, make([]byte, 0), url.Values{})
+	body, err := c.clientRequest.MakeRequest(
+		[]string{"orders", id},
+		http.MethodGet,
+		make([]byte, 0),
+		url.Values{},
+	)
 	if err != nil {
 		return RetrieveAnOrderResponse{}, err
 	}

@@ -4,13 +4,18 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/jerethom/revolut-api-go/constants"
 	"io"
 	"net/http"
 	"net/url"
+
+	"github.com/jerethom/revolut-api-go/constants"
 )
 
-func NewClientRequest(privateKey string, apiVersion constants.RevolutApiVersion, url *url.URL) *ClientRequest {
+func NewClientRequest(
+	privateKey string,
+	apiVersion constants.RevolutApiVersion,
+	url *url.URL,
+) *ClientRequest {
 	return &ClientRequest{privateKey: privateKey, apiVersion: apiVersion, url: url}
 }
 
@@ -51,9 +56,15 @@ func (c *ClientRequest) MakeRequest(
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Add(constants.HttpHeaderContentType.String(), constants.HttpHeaderValueTypeJson.String())
+	req.Header.Add(
+		constants.HttpHeaderContentType.String(),
+		constants.HttpHeaderValueTypeJson.String(),
+	)
 	req.Header.Add(constants.HttpHeaderAccept.String(), constants.HttpHeaderValueTypeJson.String())
-	req.Header.Add(constants.HttpHeaderAuthorization.String(), fmt.Sprintf(constants.HttpHeaderValueTypeBearer.String(), c.privateKey))
+	req.Header.Add(
+		constants.HttpHeaderAuthorization.String(),
+		fmt.Sprintf(constants.HttpHeaderValueTypeBearer.String(), c.privateKey),
+	)
 	req.Header.Add(constants.RevolutHeaderApiVersion.String(), c.apiVersion.String())
 
 	res, err := client.Do(req)

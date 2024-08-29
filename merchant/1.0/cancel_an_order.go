@@ -6,7 +6,7 @@ import (
 	"net/url"
 )
 
-func (c *Merchant) CancelOrder(id string) (CancelOrderResponse, error) {
+func (c *Merchant) CancelAnOrder(id string) (CancelAnOrderResponse, error) {
 	res, err := c.clientRequest.MakeRequest(
 		[]string{"orders", id, "cancel"},
 		http.MethodDelete,
@@ -14,13 +14,13 @@ func (c *Merchant) CancelOrder(id string) (CancelOrderResponse, error) {
 		url.Values{},
 	)
 	if err != nil {
-		return CancelOrderResponse{}, err
+		return CancelAnOrderResponse{}, err
 	}
 
-	response := CancelOrderResponse{}
+	response := CancelAnOrderResponse{}
 	err = json.Unmarshal(res, &response)
 	if err != nil {
-		return CancelOrderResponse{}, err
+		return CancelAnOrderResponse{}, err
 	}
 
 	return response, nil

@@ -311,7 +311,7 @@ func (i IndustryData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(nil)
 }
 
-type CreateOrderPayload struct {
+type CreateAnOrderPayload struct {
 	// The total amount of the order in minor currency units. For example, 7034 represents €70.34.
 	Amount int `json:"amount"`
 	// ISO 4217 currency code in upper case.
@@ -548,7 +548,7 @@ type Order struct {
 	//An array of line items included in the order. Each line item represents an individual product or service, along with its quantity, price, taxes, and discounts.
 	LineItems []LineItem `json:"line_items"`
 }
-type CreateOrderResponse struct {
+type CreateAnOrderResponse struct {
 	Order
 }
 
@@ -625,7 +625,7 @@ type CaptureAnOrderResponse struct {
 
 type RetrieveAnOrderListResponse []Order
 
-type CancelOrderResponse struct {
+type CancelAnOrderResponse struct {
 	Order
 }
 

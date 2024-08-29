@@ -83,7 +83,7 @@ type CreateCustomerPayload struct {
 	Phone string `json:"phone"`
 }
 
-type CreateCustomerResponse struct {
+type CreateACustomerResponse struct {
 	Customer
 }
 

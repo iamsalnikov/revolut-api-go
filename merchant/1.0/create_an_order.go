@@ -6,20 +6,20 @@ import (
 	"net/url"
 )
 
-func (c *Merchant) CreateOrder(
-	order CreateOrderPayload,
-) (CreateOrderResponse, error) {
+func (c *Merchant) CreateAnOrder(
+	order CreateAnOrderPayload,
+) (CreateAnOrderResponse, error) {
 	body, err := json.Marshal(order)
 	if err != nil {
-		return CreateOrderResponse{}, err
+		return CreateAnOrderResponse{}, err
 	}
 
 	res, err := c.clientRequest.MakeRequest([]string{"orders"}, http.MethodPost, body, url.Values{})
 	if err != nil {
-		return CreateOrderResponse{}, err
+		return CreateAnOrderResponse{}, err
 	}
 
-	response := CreateOrderResponse{}
+	response := CreateAnOrderResponse{}
 	err = json.Unmarshal(res, &response)
 	if err != nil {
 		return response, err

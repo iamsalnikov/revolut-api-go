@@ -6,7 +6,7 @@ import (
 	"net/url"
 )
 
-func (c *Merchant) ListWebhooks() ([]ListWebhooksResponse, error) {
+func (c *Merchant) RetrieveAWebhookList() (ListWebhooksResponse, error) {
 	res, err := c.clientRequest.MakeRequest(
 		[]string{"webhooks"},
 		http.MethodGet,
@@ -16,7 +16,7 @@ func (c *Merchant) ListWebhooks() ([]ListWebhooksResponse, error) {
 		return nil, err
 	}
 
-	response := make([]ListWebhooksResponse, 0)
+	var response ListWebhooksResponse
 	err = json.Unmarshal(res, &response)
 	if err != nil {
 		return nil, err

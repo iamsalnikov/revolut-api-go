@@ -6,12 +6,12 @@ import (
 	"net/url"
 )
 
-func (c *Merchant) CreateWebhook(
+func (c *Merchant) CreateAWebhook(
 	payload CreateWebhookPayload,
-) (CreateWebhookResponse, error) {
+) (CreateAWebhookResponse, error) {
 	body, err := json.Marshal(payload)
 	if err != nil {
-		return CreateWebhookResponse{}, err
+		return CreateAWebhookResponse{}, err
 	}
 
 	res, err := c.clientRequest.MakeRequest(
@@ -21,14 +21,14 @@ func (c *Merchant) CreateWebhook(
 		url.Values{},
 	)
 	if err != nil {
-		return CreateWebhookResponse{}, err
+		return CreateAWebhookResponse{}, err
 	}
 
-	response := new(CreateWebhookResponse)
-	err = json.Unmarshal(res, response)
+	response := CreateAWebhookResponse{}
+	err = json.Unmarshal(res, &response)
 	if err != nil {
-		return CreateWebhookResponse{}, err
+		return CreateAWebhookResponse{}, err
 	}
 
-	return *response, nil
+	return response, nil
 }

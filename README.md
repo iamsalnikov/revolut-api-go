@@ -4,7 +4,14 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/jerethom/revolut-api-go)](https://goreportcard.com/report/github.com/jerethom/revolut-api-go)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-`revolut-api-go` is a Go package for easy interaction with the Revolut API. It provides a simple interface to perform common operations on the Revolut API, such as customer management, order creation, and webhook management.
+`revolut-api-go` is a Go package that provides a client for interacting with the Revolut Merchant API. It offers a comprehensive set of functions to manage customers, orders, payments, and webhooks.
+
+## Features
+
+- Full support for Revolut Merchant API operations
+- Sandbox mode for testing
+- Customizable API version
+- Type-safe request and response structures
 
 ## Installation
 
@@ -21,6 +28,7 @@ go get github.com/jerethom/revolut-api-go
 ```go
 import (
     "github.com/jerethom/revolut-api-go"
+    "github.com/jerethom/revolut-api-go/constants"
 )
 
 // Default client (production)
@@ -28,34 +36,9 @@ client := revolut.NewClient("your-api-key")
 
 // Sandbox mode client
 client := revolut.NewClient("your-api-key", revolut.WithIsSandbox(true))
-```
 
-### Creating a Customer
-
-```go
-import (
-    "fmt"
-    "github.com/jerethom/revolut-api-go"
-    "github.com/jerethom/revolut-api-go/types/customer_types"
-)
-
-func main() {
-    client := revolut.NewClient("your-api-key", revolut.WithIsSandbox(true))
-    
-    payload := customer_types.CreateCustomerPayload{
-        FullName: "John Doe",
-        Email:    "john.doe@example.com",
-        // Add other required fields
-    }
-    
-    response, err := client.CreateCustomer(payload)
-    if err != nil {
-        fmt.Printf("Error creating customer: %v\n", err)
-        return
-    }
-    
-    fmt.Printf("Customer created successfully. ID: %s\n", response.ID)
-}
+// Custom API version
+client := revolut.NewClient("your-api-key", revolut.WithApiVersion(constants.RevolutApiVersion20240901))
 ```
 
 ### Creating an Order
@@ -64,77 +47,76 @@ func main() {
 import (
     "fmt"
     "github.com/jerethom/revolut-api-go"
-    "github.com/jerethom/revolut-api-go/types/order_types"
+    "github.com/jerethom/revolut-api-go/merchant/1.0"
 )
 
 func main() {
     client := revolut.NewClient("your-api-key", revolut.WithIsSandbox(true))
-    
-    order := order_types.CreateOrderPayload{
-        Amount:   100,
-        Currency: "EUR",
-        // Add other required fields
+
+    order := revolut_merchant.CreateAnOrderPayload{
+        Amount:      1000, // 10.00 in minor currency units
+        Currency:    "EUR",
+        Description: "Test order",
     }
-    
-    response, err := client.CreateOrder(order)
+
+    response, err := client.Merchant.CreateAnOrder(order)
     if err != nil {
         fmt.Printf("Error creating order: %v\n", err)
         return
     }
-    
-    fmt.Printf("Order created successfully. ID: %s\n", response.ID)
+
+    fmt.Printf("Order created successfully. ID: %s\n", response.Id)
 }
 ```
 
-### Creating a Webhook
+### Managing Customers
 
 ```go
-import (
-    "fmt"
-    "github.com/jerethom/revolut-api-go"
-    "github.com/jerethom/revolut-api-go/types/webhook_types"
-)
-
-func main() {
-    client := revolut.NewClient("your-api-key", revolut.WithIsSandbox(true))
-    
-    payload := webhook_types.CreateWebhookPayload{
-        URL:    "https://your-webhook-url.com",
-        Events: []string{"ORDER_COMPLETED", "REFUND_EXECUTED"},
-    }
-    
-    response, err := client.CreateWebhook(payload)
-    if err != nil {
-        fmt.Printf("Error creating webhook: %v\n", err)
-        return
-    }
-    
-    fmt.Printf("Webhook created successfully. ID: %s\n", response.ID)
+customer := revolut_merchant.CreateCustomerPayload{
+    FullName: "John Doe",
+    Email:    "john.doe@example.com",
+    Phone:    "+1234567890",
 }
+
+response, err := client.Merchant.CreateACustomer(customer)
+if err != nil {
+    // Handle error
+}
+
+fmt.Printf("Customer created with ID: %s\n", response.Id)
 ```
 
-## Client Options
+### Working with Webhooks
 
-- `WithApiVersion(version RevolutApiVersion)`: Sets the API version to use. The latest version is used by default.
-- `WithIsSandbox(sandbox bool)`: Enables or disables sandbox mode. Production mode is used by default.
+```go
+webhook := revolut_merchant.CreateWebhookPayload{
+    Url:    "https://your-webhook-url.com",
+    Events: []string{"ORDER_COMPLETED", "ORDER_CANCELLED"},
+}
 
-## Features
+response, err := client.Merchant.CreateAWebhook(webhook)
+if err != nil {
+    // Handle error
+}
 
-- Customer management
-- Order creation and management
-- Webhook configuration
-- And more...
+fmt.Printf("Webhook created with ID: %s\n", response.Id)
+```
 
-## Documentation
+## API Coverage
 
-For complete Revolut API documentation, please refer to the [official Revolut API documentation](https://developer.revolut.com/docs/merchant/merchant-api).
+The package covers all major operations of the Revolut Merchant API, including:
 
-For documentation specific to this package, use the `go doc` command or check the [online documentation](https://pkg.go.dev/github.com/jerethom/revolut-api-go).
+- Customer management (create, retrieve, update, delete)
+- Order operations (create, retrieve, update, cancel, capture, refund)
+- Payment handling
+- Webhook management
+
+For a complete list of available methods, please refer to the [Go Reference documentation](https://pkg.go.dev/github.com/jerethom/revolut-api-go).
 
 ## Contributing
 
-Contributions are welcome! Feel free to open an issue or submit a pull request.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

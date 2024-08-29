@@ -939,3 +939,20 @@ type PayForAnOrderResponse struct {
 	//Only returned if the payment's state is authentication_challenge.
 	AuthenticationChallenge *AuthenticationChallenge `json:"authentication_challenge"`
 }
+
+type RetrievePaymentListOfAnOrderResponse struct {
+	//The ID of the payment.
+	Id string `json:"id"`
+	//Permanent order ID used to retrieve, capture, cancel, or refund an order after authorization.
+	OrderId string `json:"order_id"`
+	//The payment method used to pay for the order.
+	PaymentMethod *PaymentMethod `json:"saved_payment_method"`
+	//Possible values: [pending, authentication_challenge, authentication_verified, authorisation_started, authorisation_passed, authorised, capture_started, captured, refund_validated, refund_started, cancellation_started, declining, completing, cancelling, failing, completed, declined, soft_declined, cancelled, failed]
+	//
+	//The status of the payment.
+	State string `json:"state"`
+	//Details about the authentication challenge that should be performed to complete the authentication process. For more information about Revolut's 3DS solution, see: 3D Secure overview.
+	//
+	//Only returned if the payment's state is authentication_challenge.
+	AuthenticationChallenge *AuthenticationChallenge `json:"authentication_challenge"`
+}

@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type Customer struct {
+type OrderCustomer struct {
 	// Permanent ID of a customer used to retrieve, update, delete a customer. This ID can also be used to link customer to an order.
 	Id string `json:"id,omitempty"`
 	//Possible values: >= 2 characters
@@ -329,7 +329,7 @@ type CreateOrderPayload struct {
 	//If you have it, we strongly advise providing at least either id, phone, or email.
 	//
 	//Using the Customers operations, you can manage customer instances.
-	Customer *Customer `json:"customer,omitempty"`
+	Customer *OrderCustomer `json:"customer,omitempty"`
 	//Possible values: [automatic, forced]
 	//
 	//Default value: automatic
@@ -657,7 +657,7 @@ type Order struct {
 	//If you have it, we strongly advise providing at least either id, phone, or email.
 	//
 	//Using the Customers operations, you can manage customer instances.
-	Customer *Customer `json:"customer"`
+	Customer *OrderCustomer `json:"customer"`
 	// The details of all the payments that have been made towards this order (successful or unsuccessful).
 	Payments []Payment `json:"payments"`
 	// Unique ID representing the location where merchants sells products.
@@ -715,7 +715,7 @@ type UpdateAnOrderPayload struct {
 	//If you have it, we strongly advise providing at least either id, phone, or email.
 	//
 	//Using the Customers operations, you can manage customer instances.
-	Customer *Customer `json:"customer,omitempty"`
+	Customer *OrderCustomer `json:"customer,omitempty"`
 	// Details about the shipping related to the order, including address, contact information, and individual shipments.
 	Shipping *Shipping `json:"shipping,omitempty"`
 	//Possible values: [automatic, forced]
@@ -929,6 +929,7 @@ type PayForAnOrderResponse struct {
 	// Permanent order ID used to retrieve, capture, cancel, or refund an order after authorization.
 	OrderId string `json:"order_id"`
 	// The payment method used to pay for the order.
+	// todo PaymentMethod is not the right type for this response see https://developer.revolut.com/docs/merchant/pay-order#response
 	PaymentMethod *PaymentMethod `json:"saved_payment_method"`
 	//Possible values: [pending, authentication_challenge, authentication_verified, authorisation_started, authorisation_passed, authorised, capture_started, captured, refund_validated, refund_started, cancellation_started, declining, completing, cancelling, failing, completed, declined, soft_declined, cancelled, failed]
 	//

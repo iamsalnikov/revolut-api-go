@@ -24,15 +24,30 @@ func (c *ClientRequest) MakeRequest(
 	path []string,
 	method string,
 	body []byte,
+	queryParams url.Values,
 ) ([]byte, error) {
 	resUrl, err := url.JoinPath(c.url.String(), path...)
 	if err != nil {
 		return nil, err
 	}
+
+	u, err := url.Parse(resUrl)
+	if err != nil {
+		return nil, err
+	}
+
+	q := u.Query()
+	for k, v := range queryParams {
+		for _, vv := range v {
+			q.Add(k, vv)
+		}
+	}
+	u.RawQuery = q.Encode()
+
 	payload := bytes.NewReader(body)
 
 	client := &http.Client{}
-	req, err := http.NewRequest(method, resUrl, payload)
+	req, err := http.NewRequest(method, u.String(), payload)
 	if err != nil {
 		return nil, err
 	}

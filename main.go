@@ -5,5 +5,5 @@ import "fmt"
 func main() {
 	client := NewClient("")
 
-	fmt.Print(client)
+	fmt.Print(client.Merchant)
 }

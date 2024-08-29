@@ -1,4 +1,4 @@
-package customer_types
+package revolut_merchant
 
 type CreateCustomerPayload struct {
 	//The full name of the customer.

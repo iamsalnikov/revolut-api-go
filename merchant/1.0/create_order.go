@@ -2,28 +2,28 @@ package revolut_merchant
 
 import (
 	"encoding/json"
-	"github.com/jerethom/revolut-api-go/merchant/1.0/types/order_types"
 	"net/http"
+	"net/url"
 )
 
 func (c *Merchant) CreateOrder(
-	order order_types.CreateOrderPayload,
-) (order_types.CreateOrderResponse, error) {
+	order CreateOrderPayload,
+) (CreateOrderResponse, error) {
 	body, err := json.Marshal(order)
 	if err != nil {
-		return order_types.CreateOrderResponse{}, err
+		return CreateOrderResponse{}, err
 	}
 
-	res, err := c.clientRequest.MakeRequest([]string{"orders"}, http.MethodPost, body)
+	res, err := c.clientRequest.MakeRequest([]string{"orders"}, http.MethodPost, body, url.Values{})
 	if err != nil {
-		return order_types.CreateOrderResponse{}, err
+		return CreateOrderResponse{}, err
 	}
 
-	response := new(order_types.CreateOrderResponse)
-	err = json.Unmarshal(res, response)
+	response := CreateOrderResponse{}
+	err = json.Unmarshal(res, &response)
 	if err != nil {
-		return order_types.CreateOrderResponse{}, err
+		return response, err
 	}
 
-	return *response, nil
+	return response, nil
 }

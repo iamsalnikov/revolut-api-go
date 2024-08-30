@@ -1,10 +1,12 @@
 package revolut
 
 import (
-	"github.com/jerethom/revolut-api-go/constants"
-	"github.com/jerethom/revolut-api-go/merchant/1.0"
-	"github.com/jerethom/revolut-api-go/shared"
 	"net/url"
+
+	revolut_business "github.com/jerethom/revolut-api-go/business"
+	"github.com/jerethom/revolut-api-go/constants"
+	revolut_merchant "github.com/jerethom/revolut-api-go/merchant/1.0"
+	"github.com/jerethom/revolut-api-go/shared"
 )
 
 type Client struct {
@@ -14,6 +16,7 @@ type Client struct {
 	isSandbox  bool
 
 	Merchant *revolut_merchant.Merchant
+	Business *revolut_business.Business
 }
 
 type ClientOption func(client *Client)
@@ -52,6 +55,7 @@ func NewClient(privateKey string, options ...ClientOption) *Client {
 
 	clientRequest := shared.NewClientRequest(client.privateKey, client.apiVersion, client.url)
 	client.Merchant = revolut_merchant.NewMerchant(clientRequest)
+	client.Business = revolut_business.NewBusiness(clientRequest)
 
 	return client
 }

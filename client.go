@@ -50,9 +50,6 @@ func NewClient(privateKey string, options ...ClientOption) *Client {
 		client.url, _ = url.Parse(constants.DefaultMerchantApiUrl)
 	}
 
-	newPath, _ := url.JoinPath(client.url.Path, string(client.apiVersion))
-	client.url.Path = newPath
-
 	clientRequest := shared.NewClientRequest(client.privateKey, client.apiVersion, client.url)
 	client.Merchant = revolut_merchant.NewMerchant(clientRequest)
 	client.Business = revolut_business.NewBusiness(clientRequest)

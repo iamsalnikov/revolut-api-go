@@ -341,7 +341,7 @@ type CreateAnOrderPayload struct {
 	//Each line item represents an individual product or service, along with its quantity, price, taxes, and discounts.
 	LineItems []LineItem `json:"line_items,omitempty"`
 	// Details about the shipping related to the order, including address, contact information, and individual shipments.
-	Shipping Shipping `json:"shipping,omitempty"`
+	Shipping *Shipping `json:"shipping,omitempty"`
 	//Possible values: [automatic, manual]
 	//
 	//Default value: automatic

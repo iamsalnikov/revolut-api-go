@@ -8,7 +8,7 @@ import (
 
 func (c *Merchant) RetrieveAWebhookList() (ListWebhooksResponse, error) {
 	res, err := c.clientRequest.MakeRequest(
-		[]string{"webhooks"},
+		[]string{"1.0", "webhooks"},
 		http.MethodGet,
 		make([]byte, 0), url.Values{},
 	)

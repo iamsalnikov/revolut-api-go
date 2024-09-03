@@ -7,7 +7,7 @@ import (
 
 func (c *Merchant) DeleteAWebhook(webhookId string) error {
 	_, err := c.clientRequest.MakeRequest(
-		[]string{"webhooks", webhookId},
+		[]string{"1.0", "webhooks", webhookId},
 		http.MethodDelete,
 		make([]byte, 0), url.Values{},
 	)

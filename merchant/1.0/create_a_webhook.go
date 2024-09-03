@@ -15,7 +15,7 @@ func (c *Merchant) CreateAWebhook(
 	}
 
 	res, err := c.clientRequest.MakeRequest(
-		[]string{"webhooks"},
+		[]string{"1.0", "webhooks"},
 		http.MethodPost,
 		body,
 		url.Values{},

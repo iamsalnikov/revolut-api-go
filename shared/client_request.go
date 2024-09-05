@@ -85,3 +85,7 @@ func (c *ClientRequest) MakeRequest(
 
 	return body, nil
 }
+
+func (c *ClientRequest) GetSecret() string {
+	return c.privateKey
+}

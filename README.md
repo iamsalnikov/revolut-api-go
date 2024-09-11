@@ -1,6 +1,8 @@
 # revolut-api-go
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/jerethom/revolut-api-go.svg)](https://pkg.go.dev/github.com/jerethom/revolut-api-go)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/jerethom/revolut-api-go)](https://github.com/jerethom/revolut-api-go/blob/main/go.mod)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/jerethom/revolut-api-go)](https://github.com/jerethom/revolut-api-go/releases)
 [![Go Report Card](https://goreportcard.com/badge/github.com/jerethom/revolut-api-go)](https://goreportcard.com/report/github.com/jerethom/revolut-api-go)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

@@ -16,6 +16,8 @@ revolut-api-go is a Go package for easy interaction with the Revolut API. It pro
 
 [Get started with installation](./installation)
 
+[See usage](./usage.md)
+
 ## Quick Links
 
 - [GitHub Repository](https://github.com/jerethom/revolut-api-go)
